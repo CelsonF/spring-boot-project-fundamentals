@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 
@@ -35,13 +36,26 @@ public class FirstController {
     @PostMapping("/methodWithBodyParams")
     public String methodWithBodyParams(@RequestBody Usuario usuario) {
         
-        return "methodWithBodyParams " + usuario.username();
+        return "The method with Body Params " + usuario.username();
+    }
+
+    @PostMapping("/methodWithHeaders")
+    public String methodWithHeaders(@RequestHeader("name") String name) {
+        
+        return "Methods with headers " + name;
+    
+    }
+    @PostMapping("/methodWithListHeaders")
+    public String methodWithListHeaders(@RequestHeader Map<String,String> headers) {
+        
+        return "Methods with list of headers " + headers.entrySet();
     }
     
-
     /**
      * Usuario
-String username     */
+     * String username    
+     * Testando o comentário para documentação 
+    */
     public record Usuario(String username) {
     }
     
