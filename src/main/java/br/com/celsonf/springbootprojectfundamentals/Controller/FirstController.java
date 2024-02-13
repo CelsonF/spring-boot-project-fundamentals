@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +52,18 @@ public class FirstController {
         
         return "Methods with list of headers " + headers.entrySet();
     }
+
+
+    @GetMapping("/methodResponseEntity/{id}")
+    public ResponseEntity<Object> methodResponseEntity(@PathVariable Long id) {
+        var usuario = new Usuario("Celson Fernando");
+
+        if(id > 5) {
+            return ResponseEntity.status(HttpStatus.OK).body(usuario);
+        }
+        return ResponseEntity.badRequest().body("Number minor than 5");
+    }
+    
     
     /**
      * Usuario

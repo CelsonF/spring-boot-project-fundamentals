@@ -65,3 +65,40 @@ O path params faz parte da requisição.
 ### Header Params
 - Authorization
 - Page
+
+### Inversão de controle (IoC)
+    O Spring é responsável por fazer essa inversão de controle através de componentes internos usando um container IoC.
+
+    Hoje em dia não é necessário realizar essa inversão manualmente por meio de código. 
+
+    
+
+### Injeção de Dependencia
+
+    No Spring esse gerenciamento é feito via notação @Autowired , e abaixo existe algum componente , ele passa a ser gerenciado pelo Spring.
+
+    Sendo necessário adicionar a notação na classe do componente que deseja que seja gerenciado utilizando a notação @Service ou @Component.
+
+#### Exemplo : 
+```java
+@RestController
+@RequestMapping("/component")
+public class MeuControllerComponent {
+
+    @Autowired
+    MeuComponent meuComponent;
+    
+    @GetMapping("/")
+    public String chamandoComponent() {
+        var resultado = meuComponent.chamarMeuComponent() ;
+        return resultado;
+    }
+}
+
+@Service 
+public class MeuComponent {
+    public String chamarMeuComponent() {
+        return "Chamando meu component"; 
+    }
+}
+```
